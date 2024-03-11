@@ -35,8 +35,8 @@ public class ArticleController {
     @GetMapping("/api/articles/{id}")
     @ResponseBody
     public ResponseEntity<ArticleResponse> showOne(@PathVariable Long id) {
-        Article one = articleService.findOne(id);
-        return ResponseEntity.ok(one.from());
+        Article article = articleService.findOne(id);
+        return ResponseEntity.ok(article.mapper());
     }
 
     // 등록 API
@@ -46,7 +46,7 @@ public class ArticleController {
         Article article = request.mapper();
         int count = articleService.insertOneArticle(article);
         log.info("save count: {}", count);
-        return ResponseEntity.status(HttpStatus.CREATED).body(article.from());
+        return ResponseEntity.status(HttpStatus.CREATED).body(article.mapper());
     }
 
     // 수정 API
@@ -55,7 +55,7 @@ public class ArticleController {
     public ResponseEntity<ArticleResponse> modify(@PathVariable Long id,
                                                   @RequestBody ModifyArticleRequest request) {
         Article article = articleService.update(id, request);
-        return ResponseEntity.ok(article.from());
+        return ResponseEntity.ok(article.mapper());
     }
 
     // 삭제 API

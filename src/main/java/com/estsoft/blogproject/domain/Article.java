@@ -20,7 +20,7 @@ public class Article {
         this.content = content;
     }
 
-    public ArticleResponse from() {
+    public ArticleResponse mapper() {
         return new ArticleResponse(id, title, content);
     }
 }
